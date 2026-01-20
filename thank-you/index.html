@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes | Subscription Confirmed</title>
+    
+    <!-- Google Fonts: Same as Landing Page for consistency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-color: #0f0f11;
+            --card-bg: #1a1a1d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #d4af37; /* Muted Gold */
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- CONTAINER --- */
+        .card {
+            background: radial-gradient(circle at center, #252529 0%, #1a1a1d 100%);
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #333;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* --- SOFT ASK BOX --- */
+        .soft-ask {
+            background-color: rgba(212, 175, 55, 0.05); /* Very subtle gold tint */
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .soft-ask p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid #444;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            padding: 10px 20px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            color: var(--text-main);
+        }
+
+        /* --- ICONS --- */
+        .icon-check {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <span class="icon-check">✦</span>
+        
+        <h1>It’s on the way.</h1>
+        
+        <p>
+            Your <strong>Starter Pack</strong> has been sent to your inbox.<br>
+            It should arrive in about 2 minutes.
+        </p>
+
+        <!-- THE SOFT ASK (O Pulo do Gato) -->
+        <div class="soft-ask">
+            <p>
+                <strong>While you wait...</strong><br>
+                Echoes is an independent project fueled by caffeine and passion. 
+                If you want to support independent art right now, you can buy me a coffee. 
+            </p>
+            
+            <!-- Link to Buy Me a Coffee / Stripe / PayPal -->
+            <a href="#" class="btn btn-primary" target="_blank">☕ Support Echoes</a>
+        </div>
+
+        <p style="font-size: 0.9rem; margin-bottom: 10px;">
+            Not ready to support yet? No worries at all.
+        </p>
+        
+        <a href="https://instagram.com/SEU_USER" class="btn btn-secondary">Back to Instagram</a>
+    </div>
+
+</body>
+</html>
