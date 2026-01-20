@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes | The Starter Pack</title>
+    <meta name="description" content="Join the inner circle. Get the exclusive Echoes Starter Pack: 7 extended stories and the playlist that inspired them.">
+    
+    <!-- Google Fonts: Playfair Display (Elegant/Title) & Lora (Reading/Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0f0f11; /* Almost Black */
+            --card-bg: #1a1a1d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #d4af37; /* Muted Gold */
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; border-radius: 4px; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            padding: 16px 32px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: 1px solid var(--text-main);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            transform: translateY(-2px);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh; /* Takes most of the screen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1d 0%, #0f0f11 70%);
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .hero-content h1 span {
+            color: var(--text-muted);
+            font-style: italic;
+            font-weight: 400;
+            display: block;
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- WHAT'S INSIDE (Split Layout) --- */
+        .features {
+            background-color: var(--card-bg);
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .features-text h2 {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .feature-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .feature-title {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PLAYLIST SECTION --- */
+        .playlist-section {
+            text-align: center;
+        }
+
+        .playlist-wrapper {
+            margin-top: 40px;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+            background: #111;
+        }
+
+        /* --- SIGNUP SECTION (Bottom) --- */
+        .signup-section {
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-color), #151515);
+        }
+
+        .substack-embed-container {
+            max-width: 480px;
+            margin: 40px auto 0;
+            background: #fff; /* Substack usually needs light bg, or custom css */
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        /* Instructions for you, hidden in production if you want */
+        .setup-note {
+            background: #332b00;
+            color: #ffd700;
+            padding: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            font-family: sans-serif;
+            margin-bottom: 20px;
+            border: 1px solid #665500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            border-top: 1px solid #222;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content h1 span { font-size: 1.8rem; }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-image {
+                order: -1; /* Image on top on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>
+                Escape the Noise.
+                <span>Rediscover Deep Storytelling.</span>
+            </h1>
+            <p>
+                The algorithm feeds you distractions. Echoes feeds your soul. 
+                Join 1,000+ readers and get the exclusive <strong>Starter Pack</strong> for free.
+            </p>
+            <a href="#signup" class="btn">Get My Starter Pack</a>
+            <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.6; font-style: italic;">
+                Free. No spam. Unsubscribe anytime.
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section-padding features">
+        <div class="container">
+            <div class="features-grid">
+                
+                <!-- Text Side -->
+                <div class="features-text">
+                    <h2>What's inside the pack?</h2>
+                    <p style="color: var(--text-muted);">
+                        I curated my most impactful pieces and the music that inspired them into a single welcome gift.
+                    </p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-icon">✦</span>
+                            <div>
+                                <span class="feature-title">7 Extended Flash Fictions</span>
+                                <span class="feature-desc">The "Director's Cut" versions of my most viral reels. Deeper, rawer, and uncut.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">♫</span>
+                            <div>
+                                <span class="feature-title">The 'Mood' Playlist</span>
+                                <span class="feature-desc">A curated Spotify selection to listen to while you read. Experience the atmosphere.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✉</span>
+                            <div>
+                                <span class="feature-title">A Weekly Shelter</span>
+                                <span class="feature-desc">Receive one new deep story every week in your inbox. A moment of pause in your chaotic week.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Image Side -->
+                <div class="features-image">
+                    <!-- REPLACE WITH YOUR IMAGE: Suggestion - A mockup of a tablet showing a story + coffee cup -->
+                    <img src="https://placehold.co/600x700/222/555?text=Cover+Image+Mockup" alt="Echoes Starter Pack Mockup">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL / SOCIAL PROOF -->
+    <section class="section-padding" style="text-align: center;">
+        <div class="container">
+            <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;">“</div>
+            <h3 style="font-family: var(--font-title); font-size: 1.5rem; max-width: 600px; margin: 0 auto 20px;">
+                I stopped scrolling for the first time in months. Finally, something that makes me feel, not just watch.
+            </h3>
+            <p style="color: var(--text-muted); font-style: italic;">— Sarah J., Reader since 2023</p>
+        </div>
+    </section>
+
+    <!-- SIGNUP SECTION -->
+    <section id="signup" class="section-padding signup-section">
+        <div class="container">
+            <h2 style="font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 10px;">
+                Claim Your Starter Pack
+            </h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">
+                Enter your email below. The pack will arrive in your inbox instantly.
+            </p>
+
+            <!-- SUBSTACK EMBED AREA -->
+            <div class="substack-embed-container">
+                
+                <!-- 
+                    INSTRUCTIONS TO CLIENT:
+                    1. Go to Substack Dashboard > Settings > Import/Export (or Widget)
+                    2. Copy the "Embed Form" code (iframe).
+                    3. Paste it below this comment and DELETE the placeholder text.
+                -->
+                
+                <div style="padding: 40px; color: #333; text-align: center;">
+                    <p style="font-weight: bold;">[PASTE SUBSTACK IFRAME CODE HERE]</p>
+                    <small>Go to Substack Settings > Embed Form to get your code.</small>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Elvy Gerez | Echoes.</p>
+            <p style="margin-top: 10px; opacity: 0.5;">
+                <a href="#">Instagram</a> • <a href="#">Substack</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
