@@ -3,343 +3,911 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes | The Starter Pack</title>
-    <meta name="description" content="Join the inner circle. Get the exclusive Echoes Starter Pack: 7 extended stories and the playlist that inspired them.">
-    
-    <!-- Google Fonts: Playfair Display (Elegant/Title) & Lora (Reading/Body) -->
+    <title>The Starter Pack — Echoes by Elvy Gerez</title>
+    <meta name="description" content="Seven illustrated flash fiction stories about love, desire, vulnerability, and connection. A curated collection by Elvy Gerez.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* --- RESET & BASE STYLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-deep: #0a0908;
+            --bg-warm: #12100e;
+            --bg-card: #1a1714;
+            --bg-card-hover: #221f1a;
+            --gold: #c9a96e;
+            --gold-light: #d4ba85;
+            --gold-dim: #8a7348;
+            --cream: #e8dcc8;
+            --cream-soft: #d4c5ac;
+            --text-primary: #e8dcc8;
+            --text-secondary: #a89a82;
+            --text-dim: #6b6052;
+            --border-subtle: rgba(201, 169, 110, 0.12);
+            --border-hover: rgba(201, 169, 110, 0.25);
         }
 
-        :root {
-            --bg-color: #0f0f11; /* Almost Black */
-            --card-bg: #1a1a1d;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent: #d4af37; /* Muted Gold */
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Lora', serif;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold-dim) var(--bg-deep);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.6;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Lora', Georgia, serif;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; border-radius: 4px; }
-
-        /* --- UTILITIES --- */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Noise texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--text-main);
-            color: var(--bg-color);
-            padding: 16px 32px;
-            font-family: var(--font-body);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            border: 1px solid var(--text-main);
+        ::selection {
+            background: rgba(201, 169, 110, 0.3);
+            color: var(--cream);
         }
 
-        .btn:hover {
-            background-color: transparent;
-            color: var(--text-main);
-            transform: translateY(-2px);
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        /* --- HERO SECTION --- */
+        /* ===== HERO ===== */
         .hero {
-            height: 90vh; /* Takes most of the screen */
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: radial-gradient(circle at center, #1a1a1d 0%, #0f0f11 70%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content h1 {
-            font-family: var(--font-title);
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: var(--text-main);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(139, 58, 58, 0.025) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(201, 169, 110, 0.02) 0%, transparent 40%);
         }
 
-        .hero-content h1 span {
-            color: var(--text-muted);
+        /* Decorative corner ornaments */
+        .hero-corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-color: var(--gold-dim);
+            opacity: 0.2;
+        }
+        .hero-corner--tl { top: 3rem; left: 3rem; border-top: 1px solid; border-left: 1px solid; }
+        .hero-corner--tr { top: 3rem; right: 3rem; border-top: 1px solid; border-right: 1px solid; }
+        .hero-corner--bl { bottom: 3rem; left: 3rem; border-bottom: 1px solid; border-left: 1px solid; }
+        .hero-corner--br { bottom: 3rem; right: 3rem; border-bottom: 1px solid; border-right: 1px solid; }
+
+        .hero-brand {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.7rem;
+            letter-spacing: 1.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(3rem, 8vw, 7rem);
+            color: var(--cream);
+            line-height: 1.05;
+            margin-bottom: 0.2em;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: fadeUp 1.2s ease 0.5s forwards;
+        }
+
+        .hero-title em {
             font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-edition {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .hero-divider {
+            width: 50px;
+            height: 1px;
+            background: var(--gold-dim);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .hero-subtitle {
+            font-family: 'Lora', serif;
             font-weight: 400;
-            display: block;
-            font-size: 2.5rem;
-            margin-top: 10px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* --- WHAT'S INSIDE (Split Layout) --- */
-        .features {
-            background-color: var(--card-bg);
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .features-text h2 {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin-top: 30px;
-        }
-
-        .feature-list li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .feature-icon {
-            color: var(--accent);
-            margin-right: 15px;
-            font-size: 1.2rem;
-            margin-top: 2px;
-        }
-
-        .feature-title {
-            font-weight: 700;
-            display: block;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-        .feature-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* --- PLAYLIST SECTION --- */
-        .playlist-section {
-            text-align: center;
-        }
-
-        .playlist-wrapper {
-            margin-top: 40px;
-            border: 1px solid #333;
-            padding: 20px;
-            border-radius: 8px;
-            background: #111;
-        }
-
-        /* --- SIGNUP SECTION (Bottom) --- */
-        .signup-section {
-            text-align: center;
-            background: linear-gradient(to bottom, var(--bg-color), #151515);
-        }
-
-        .substack-embed-container {
+            font-style: italic;
+            font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+            color: var(--text-secondary);
             max-width: 480px;
-            margin: 40px auto 0;
-            background: #fff; /* Substack usually needs light bg, or custom css */
-            padding: 2px;
-            border-radius: 4px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeUp 1.2s ease 1.1s forwards;
         }
 
-        /* Instructions for you, hidden in production if you want */
-        .setup-note {
-            background: #332b00;
-            color: #ffd700;
-            padding: 10px;
-            font-size: 0.8rem;
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            opacity: 0;
+            animation: fadeUp 1s ease 1.6s forwards;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 35px;
+            background: linear-gradient(to bottom, var(--gold-dim), transparent);
+            animation: scrollPulse 2.5s ease-in-out infinite;
+        }
+
+        /* ===== WELCOME LETTER ===== */
+        .welcome {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 6rem 2rem 5rem;
+        }
+
+        .welcome-header {
             text-align: center;
-            font-family: sans-serif;
-            margin-bottom: 20px;
-            border: 1px solid #665500;
+            margin-bottom: 2.5rem;
         }
 
-        /* --- FOOTER --- */
+        .welcome-icon {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--gold-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .welcome-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 2.2rem;
+            color: var(--cream);
+        }
+
+        .welcome-body p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.95;
+            margin-bottom: 1.2rem;
+        }
+
+        .welcome-body strong {
+            color: var(--cream-soft);
+            font-weight: 500;
+        }
+
+        .welcome-body .highlight-text {
+            color: var(--cream);
+            font-style: italic;
+        }
+
+        .welcome-what {
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .welcome-what h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-item {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .welcome-item-icon {
+            color: var(--gold-dim);
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .welcome-signature {
+            text-align: right;
+            margin-top: 2.5rem;
+        }
+
+        .welcome-signature p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem !important;
+            line-height: 1.5 !important;
+        }
+
+        .welcome-signature .name {
+            font-size: 1.6rem;
+            color: var(--gold);
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+        }
+
+        .divider span {
+            color: var(--gold-dim);
+            font-size: 0.9rem;
+        }
+
+        /* ===== STORIES SECTION ===== */
+        .stories {
+            padding: 4rem 2rem 5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--cream);
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-desc {
+            font-style: italic;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 460px;
+            margin: 0 auto 3rem;
+            font-size: 1rem;
+        }
+
+        .story-card {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            gap: 1.2rem;
+            align-items: start;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: var(--gold);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .story-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            transform: translateX(6px);
+        }
+
+        .story-card:hover::before {
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+
+        .story-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 2rem;
+            color: var(--text-dim);
+            line-height: 1;
+            padding-top: 0.15rem;
+            transition: color 0.4s ease;
+        }
+
+        .story-card:hover .story-number {
+            color: var(--gold);
+        }
+
+        .story-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-bottom: 0.15rem;
+            transition: color 0.3s ease;
+        }
+
+        .story-card:hover .story-content h3 {
+            color: var(--gold-light);
+        }
+
+        .story-theme {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 400;
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .story-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .story-song {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        .story-song-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.5;
+        }
+
+        .story-arrow {
+            align-self: center;
+            color: var(--gold);
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover .story-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== PLAYLIST SECTION ===== */
+        .playlist {
+            padding: 4rem 2rem 5rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .playlist-desc {
+            font-style: italic;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .spotify-wrapper {
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .spotify-wrapper:hover {
+            border-color: var(--border-hover);
+        }
+
+        .spotify-wrapper iframe {
+            display: block;
+            border: none;
+        }
+
+        /* ===== WHAT IS ECHOES ===== */
+        .about {
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 4rem 2rem 5rem;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 2.2rem;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        .about .emphasis {
+            color: var(--cream);
+            font-style: italic;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            padding: 5rem 2rem 6rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(201, 169, 110, 0.035) 0%, transparent 65%);
+        }
+
+        .cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            color: var(--cream);
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .cta p {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            color: var(--bg-deep);
+            letter-spacing: 0.35em;
+        }
+
+        /* ===== FOOTER ===== */
         footer {
-            padding: 40px 0;
+            padding: 3rem 2rem;
             text-align: center;
-            font-size: 0.8rem;
-            color: #555;
-            border-top: 1px solid #222;
+            border-top: 1px solid var(--border-subtle);
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-content h1 span { font-size: 1.8rem; }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.2; transform: scaleY(0.8); }
+            50% { opacity: 0.7; transform: scaleY(1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .hero-corner { display: none; }
+
+            .story-card {
+                grid-template-columns: 36px 1fr;
+                gap: 0.8rem;
+                padding: 1.4rem 1.2rem;
             }
 
-            .features-image {
-                order: -1; /* Image on top on mobile */
-            }
+            .story-arrow { display: none; }
+
+            .story-number { font-size: 1.5rem; }
+
+            .story-content h3 { font-size: 1.2rem; }
+
+            .welcome { padding: 4rem 1.5rem 3rem; }
+
+            .welcome-header h2 { font-size: 1.8rem; }
+
+            .stories { padding: 3rem 1rem 4rem; }
+
+            .playlist { padding: 3rem 1rem 4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HERO SECTION -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
-        <div class="container hero-content">
-            <h1>
-                Escape the Noise.
-                <span>Rediscover Deep Storytelling.</span>
-            </h1>
-            <p>
-                The algorithm feeds you distractions. Echoes feeds your soul. 
-                Join 1,000+ readers and get the exclusive <strong>Starter Pack</strong> for free.
-            </p>
-            <a href="#signup" class="btn">Get My Starter Pack</a>
-            <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.6; font-style: italic;">
-                Free. No spam. Unsubscribe anytime.
-            </p>
+        <div class="hero-corner hero-corner--tl"></div>
+        <div class="hero-corner hero-corner--tr"></div>
+        <div class="hero-corner hero-corner--bl"></div>
+        <div class="hero-corner hero-corner--br"></div>
+
+        <div class="hero-brand">Echoes</div>
+        <h1 class="hero-title">The <em>Starter</em> Pack</h1>
+        <div class="hero-edition">Seven Stories · One Playlist · One Journey</div>
+        <div class="hero-divider"></div>
+        <p class="hero-subtitle">A journey through the landscapes of love — from the first brave yes to the quiet arrival of trust.</p>
+
+        <div class="hero-scroll">
+            <span>Scroll to begin</span>
+            <div class="hero-scroll-line"></div>
         </div>
     </section>
 
-    <!-- FEATURES SECTION -->
-    <section class="section-padding features">
-        <div class="container">
-            <div class="features-grid">
-                
-                <!-- Text Side -->
-                <div class="features-text">
-                    <h2>What's inside the pack?</h2>
-                    <p style="color: var(--text-muted);">
-                        I curated my most impactful pieces and the music that inspired them into a single welcome gift.
-                    </p>
-                    
-                    <ul class="feature-list">
-                        <li>
-                            <span class="feature-icon">✦</span>
-                            <div>
-                                <span class="feature-title">7 Extended Flash Fictions</span>
-                                <span class="feature-desc">The "Director's Cut" versions of my most viral reels. Deeper, rawer, and uncut.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="feature-icon">♫</span>
-                            <div>
-                                <span class="feature-title">The 'Mood' Playlist</span>
-                                <span class="feature-desc">A curated Spotify selection to listen to while you read. Experience the atmosphere.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="feature-icon">✉</span>
-                            <div>
-                                <span class="feature-title">A Weekly Shelter</span>
-                                <span class="feature-desc">Receive one new deep story every week in your inbox. A moment of pause in your chaotic week.</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
 
-                <!-- Image Side -->
-                <div class="features-image">
-                    <!-- REPLACE WITH YOUR IMAGE: Suggestion - A mockup of a tablet showing a story + coffee cup -->
-                    <img src="https://placehold.co/600x700/222/555?text=Cover+Image+Mockup" alt="Echoes Starter Pack Mockup">
-                </div>
+    <!-- ===== WELCOME LETTER ===== -->
+    <section class="welcome reveal">
+        <div class="welcome-header">
+            <div class="welcome-icon">✉</div>
+            <h2>A Note from Elvy</h2>
+        </div>
 
+        <div class="welcome-body">
+            <p>If you found your way to this letter, it means something in my work spoke to you. Maybe it was a story about love that felt too close to home. Maybe it was a quote that made you stop scrolling. Maybe you were just curious about what happens when someone tries to turn their messy, beautiful feelings into art.</p>
+
+            <p>Whatever brought you here — thank you for showing up.</p>
+
+            <div class="welcome-what">
+                <h3>What you're holding:</h3>
+                <div class="welcome-item">
+                    <span class="welcome-item-icon">✦</span>
+                    <span><strong>7 Illustrated Flash Fiction Stories</strong> — Some of my most personal pieces about love, grief, memory, and all the complicated stuff we don't always have words for</span>
+                </div>
+                <div class="welcome-item">
+                    <span class="welcome-item-icon">♫</span>
+                    <span><strong>The 'In Truth: Flash Fiction' Playlist</strong> — The songs that shaped these stories. Listen while you read — music and narrative were meant to live together</span>
+                </div>
+                <div class="welcome-item">
+                    <span class="welcome-item-icon">✉</span>
+                    <span><strong>This letter</strong> — Just me, saying hello</span>
+                </div>
             </div>
+
+            <p>This isn't a blog. It's not advice or self-help or productivity hacks.</p>
+
+            <p>Echoes is where I build a body of work that explores the things that feel too big to keep inside — the moments that change us, the people we can't forget, the versions of ourselves we had to leave behind to become who we are now.</p>
+
+            <p class="highlight-text">The things we feel deeply are worth examining, even when — especially when — they're uncomfortable.</p>
+
+            <p>Read the stories in order. Press play on the playlist. Let the music carry you through.</p>
+        </div>
+
+        <div class="welcome-signature">
+            <p>With gratitude,</p>
+            <p class="name">— Elvy</p>
         </div>
     </section>
 
-    <!-- TESTIMONIAL / SOCIAL PROOF -->
-    <section class="section-padding" style="text-align: center;">
-        <div class="container">
-            <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;">“</div>
-            <h3 style="font-family: var(--font-title); font-size: 1.5rem; max-width: 600px; margin: 0 auto 20px;">
-                I stopped scrolling for the first time in months. Finally, something that makes me feel, not just watch.
-            </h3>
-            <p style="color: var(--text-muted); font-style: italic;">— Sarah J., Reader since 2023</p>
-        </div>
-    </section>
 
-    <!-- SIGNUP SECTION -->
-    <section id="signup" class="section-padding signup-section">
-        <div class="container">
-            <h2 style="font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 10px;">
-                Claim Your Starter Pack
-            </h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px;">
-                Enter your email below. The pack will arrive in your inbox instantly.
-            </p>
+    <div class="divider"><span>✦</span></div>
 
-            <!-- SUBSTACK EMBED AREA -->
-            <div class="substack-embed-container">
-                
-                <!-- 
-                    INSTRUCTIONS TO CLIENT:
-                    1. Go to Substack Dashboard > Settings > Import/Export (or Widget)
-                    2. Copy the "Embed Form" code (iframe).
-                    3. Paste it below this comment and DELETE the placeholder text.
-                -->
-                
-                <div style="padding: 40px; color: #333; text-align: center;">
-                    <p style="font-weight: bold;">[PASTE SUBSTACK IFRAME CODE HERE]</p>
-                    <small>Go to Substack Settings > Embed Form to get your code.</small>
-                </div>
 
+    <!-- ===== STORIES ===== -->
+    <section class="stories">
+        <p class="section-label reveal">Seven Extended Flash Fictions</p>
+        <h2 class="section-title reveal">The Stories</h2>
+        <p class="section-desc reveal">Read them in sequence. Each one builds on the last — from becoming to arrival.</p>
+
+        <!-- Story I -->
+        <a href="https://www.elvygerez.com/p/enchanted-reverie" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">I</div>
+            <div class="story-content">
+                <div class="story-theme">Becoming</div>
+                <h3>Enchanted Reverie</h3>
+                <p class="story-desc">The origin story — youth, openness, departure from home, and the first brave yes. Love as possibility.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Love & War in Your Twenties" — Jordy Searcy
+                </span>
             </div>
-            
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story II -->
+        <a href="https://www.elvygerez.com/p/high-hopes" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">II</div>
+            <div class="story-content">
+                <div class="story-theme">Anticipation</div>
+                <h3>High Hopes</h3>
+                <p class="story-desc">The moment before risk. Hope tempered by past disappointment. Vulnerability without resolution yet.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Let Down" — Michigander
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story III -->
+        <a href="https://www.elvygerez.com/p/whispered-lightning" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">III</div>
+            <div class="story-content">
+                <div class="story-theme">Discovery</div>
+                <h3>Whispered Lightning</h3>
+                <p class="story-desc">Shared experience, awe, laughter, presence. Intimacy without commitment — connection formed in moments stolen from time.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Briggs" — Mike Mains & The Branches
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story IV -->
+        <a href="https://www.elvygerez.com/p/the-asking" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">IV</div>
+            <div class="story-content">
+                <div class="story-theme">Choice</div>
+                <h3>The Asking</h3>
+                <p class="story-desc">The emotional hinge of the collection. Love becomes intentional. Where possibility turns into promise.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Romeo & Juliet" — Peter McPoland
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story V -->
+        <a href="https://www.elvygerez.com/p/infinito-amore" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">V</div>
+            <div class="story-content">
+                <div class="story-theme">Endurance</div>
+                <h3>Infinito Amore</h3>
+                <p class="story-desc">Love lived in time. Devotion, gratitude, and the quiet fear of loss after years together. Grounded in longevity.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Slip" — Anees
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story VI -->
+        <a href="https://www.elvygerez.com/p/primal" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">VI</div>
+            <div class="story-content">
+                <div class="story-theme">Desire</div>
+                <h3>Primal</h3>
+                <p class="story-desc">Raw, embodied love. Not the beginning, but the depth — where trust allows surrender and instinct without apology.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Animal (Acoustic)" — Neon Trees
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+
+        <!-- Story VII -->
+        <a href="https://www.elvygerez.com/p/in-truth" target="_blank" rel="noopener" class="story-card reveal">
+            <div class="story-number">VII</div>
+            <div class="story-content">
+                <div class="story-theme">Arrival</div>
+                <h3>In Truth</h3>
+                <p class="story-desc">The final state: safety, curiosity, mutual exploration. Love as a shared language. The soft landing, not a climax.</p>
+                <span class="story-song">
+                    <svg class="story-song-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    "Nothing's Gonna Hurt You Baby" — Cigarettes After Sex
+                </span>
+            </div>
+            <span class="story-arrow">→</span>
+        </a>
+    </section>
+
+
+    <div class="divider"><span>♫</span></div>
+
+
+    <!-- ===== PLAYLIST ===== -->
+    <section class="playlist">
+        <p class="section-label reveal">The Soundtrack</p>
+        <h2 class="section-title reveal">In Truth: Flash Fiction</h2>
+        <p class="playlist-desc reveal">The songs that inspired these stories. Press play and read — music and narrative were meant to live together.</p>
+
+        <div class="spotify-wrapper reveal">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5XcA1oGeMEQ9agAsdKW57O?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     </section>
 
-    <!-- FOOTER -->
+
+    <div class="divider"><span>✦</span></div>
+
+
+    <!-- ===== WHAT IS ECHOES ===== -->
+    <section class="about reveal">
+        <p class="section-label">About</p>
+        <h2>What is Echoes?</h2>
+        <p>Echoes is where I build a body of work that explores the things that feel too big to keep inside — the moments that change us, the people we can't forget, the versions of ourselves we had to leave behind to become who we are now.</p>
+        <p>I write flash fiction — ultra-short stories, usually 100–300 words — because sometimes the smallest moments hold the deepest truths.</p>
+        <p class="emphasis">For those who feel deeply and aren't afraid of the dark parts.</p>
+    </section>
+
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+        <p class="section-label reveal">Stay</p>
+        <h2 class="reveal">Want more stories like these?</h2>
+        <p class="reveal">Every week, a new story arrives in your inbox. A moment of pause in your chaotic week.</p>
+        <a href="https://www.elvygerez.com/" target="_blank" rel="noopener" class="cta-button reveal">Subscribe to Echoes</a>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Elvy Gerez | Echoes.</p>
-            <p style="margin-top: 10px; opacity: 0.5;">
-                <a href="#">Instagram</a> • <a href="#">Substack</a>
-            </p>
+        <div class="footer-brand">Echoes</div>
+        <div class="footer-links">
+            <a href="https://www.elvygerez.com/" target="_blank" rel="noopener">Substack</a>
+            <a href="https://www.instagram.com/elvygerez/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://open.spotify.com/playlist/5XcA1oGeMEQ9agAsdKW57O" target="_blank" rel="noopener">Spotify</a>
         </div>
+        <p class="footer-copy">&copy; 2025 Elvy Gerez. All rights reserved.</p>
     </footer>
+
+
+    <!-- ===== SCROLL REVEAL SCRIPT ===== -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
