@@ -3,167 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes | Subscription Confirmed</title>
-    
-    <!-- Google Fonts: Same as Landing Page for consistency -->
+    <title>It's On The Way — Echoes by Elvy Gerez</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- 
+    =============================================
+    META PIXEL — PASTE YOUR PIXEL CODE BELOW
+    (Same pixel as landing page)
+    =============================================
+    -->
+    <!-- Meta Pixel Code -->
+    <!-- 
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID_HERE');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');  // IMPORTANT: tracks conversion
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=Lead&noscript=1"/></noscript>
+    -->
+    <!-- End Meta Pixel Code -->
 
     <style>
-        /* --- RESET & BASE STYLES --- */
+        :root {
+            --bg-deep: #0a0908;
+            --bg-warm: #12100e;
+            --bg-card: #1a1714;
+            --bg-card-hover: #221f1a;
+            --gold: #c9a96e;
+            --gold-light: #d4ba85;
+            --gold-dim: #8a7348;
+            --cream: #e8dcc8;
+            --cream-soft: #d4c5ac;
+            --text-primary: #e8dcc8;
+            --text-secondary: #a89a82;
+            --text-dim: #6b6052;
+            --border-subtle: rgba(201, 169, 110, 0.12);
+            --border-hover: rgba(201, 169, 110, 0.25);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --bg-color: #0f0f11;
-            --card-bg: #1a1a1d;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent: #d4af37; /* Muted Gold */
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Lora', serif;
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Lora', Georgia, serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            height: 100vh;
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        ::selection {
+            background: rgba(201, 169, 110, 0.3);
+            color: var(--cream);
+        }
+
+        /* ===== LAYOUT ===== */
+        .page {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            position: relative;
         }
 
-        /* --- CONTAINER --- */
-        .card {
-            background: radial-gradient(circle at center, #252529 0%, #1a1a1d 100%);
-            padding: 60px 40px;
-            max-width: 600px;
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(201, 169, 110, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 70%, rgba(139, 58, 58, 0.02) 0%, transparent 50%);
+        }
+
+        .container {
             width: 100%;
-            border-radius: 4px;
-            border: 1px solid #333;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 480px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1 {
-            font-family: var(--font-title);
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            line-height: 1.1;
+        /* ===== BRAND ===== */
+        .brand {
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
         }
 
-        .highlight {
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
-
-        /* --- SOFT ASK BOX --- */
-        .soft-ask {
-            background-color: rgba(212, 175, 55, 0.05); /* Very subtle gold tint */
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-
-        .soft-ask p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            color: #ccc;
-        }
-
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            font-family: var(--font-body);
-            font-weight: 700;
+        .brand-name {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 1em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 2px;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            color: var(--gold-dim);
+        }
+
+        /* ===== CHECK ANIMATION ===== */
+        .check-circle {
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+        }
+
+        .check-icon {
+            width: 32px;
+            height: 32px;
+            stroke: var(--gold);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: drawCheck 0.5s ease 0.9s forwards;
+        }
+
+        /* ===== CONTENT ===== */
+        .title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(2.2rem, 6vw, 3rem);
+            color: var(--cream);
+            line-height: 1.15;
+            margin-bottom: 0.6em;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 400px;
+            margin: 0 auto 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .inbox-note {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1s forwards;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 0 auto 2.5rem;
+            max-width: 180px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.1s forwards;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+        }
+
+        .divider span {
+            color: var(--gold-dim);
             font-size: 0.85rem;
-            cursor: pointer;
+        }
+
+        /* ===== WHILE YOU WAIT ===== */
+        .meanwhile {
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+            margin-bottom: 2.5rem;
+        }
+
+        .meanwhile-label {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+        }
+
+        .meanwhile-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .meanwhile-text strong {
+            color: var(--cream-soft);
+            font-weight: 500;
+        }
+
+        /* ===== BUTTONS ===== */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.4s forwards;
         }
 
         .btn-primary {
-            background-color: var(--accent);
-            color: #000;
-            border: 1px solid var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 400;
+            font-size: 0.78rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
-            background-color: transparent;
-            color: var(--accent);
+            background: var(--gold);
+            color: var(--bg-deep);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--text-muted);
-            border: 1px solid #444;
-            margin-top: 15px;
-            font-size: 0.8rem;
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 2rem;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
-            border-color: var(--text-muted);
-            color: var(--text-main);
+            border-color: var(--border-hover);
+            color: var(--cream-soft);
         }
 
-        /* --- ICONS --- */
-        .icon-check {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-            display: block;
+        .btn-note {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
         }
 
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.5s forwards;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 540px) {
+            .page { padding: 2rem 1.2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <span class="icon-check">✦</span>
-        
-        <h1>It’s on the way.</h1>
-        
-        <p>
-            Your <strong>Starter Pack</strong> has been sent to your inbox.<br>
-            It should arrive in about 2 minutes.
-        </p>
+    <main class="page">
+        <div class="container">
 
-        <!-- THE SOFT ASK (O Pulo do Gato) -->
-        <div class="soft-ask">
-            <p>
-                <strong>While you wait...</strong><br>
-                Echoes is an independent project fueled by caffeine and passion. 
-                If you want to support independent art right now, you can buy me a coffee. 
-            </p>
-            
-            <!-- Link to Buy Me a Coffee / Stripe / PayPal -->
-            <a href="#" class="btn btn-primary" target="_blank">☕ Support Echoes</a>
+            <!-- Brand -->
+            <div class="brand">
+                <span class="brand-name">Echoes</span>
+            </div>
+
+            <!-- Check Animation -->
+            <div class="check-circle">
+                <svg class="check-icon" viewBox="0 0 24 24">
+                    <polyline points="6 12 10 16 18 8"></polyline>
+                </svg>
+            </div>
+
+            <!-- Title -->
+            <h1 class="title">It's on <em>the way.</em></h1>
+
+            <!-- Message -->
+            <p class="message">Your Starter Pack has been sent to your inbox. Seven stories, one playlist, and a letter from Elvy — all waiting for you.</p>
+
+            <p class="inbox-note">Check your inbox in the next 2 minutes. If you don't see it, check your spam folder.</p>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- While You Wait -->
+            <div class="meanwhile">
+                <p class="meanwhile-label">While you wait</p>
+                <p class="meanwhile-text">Echoes is an <strong>independent project</strong> — no publishers, no sponsors, no algorithms deciding what gets written. If this kind of work matters to you, there are two ways to help it grow:</p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <a href="https://buymeacoffee.com/elvygerez" class="btn-primary" target="_blank" rel="noopener">☕ Buy Elvy a Coffee</a>
+                <a href="https://www.instagram.com/elvygerez/" class="btn-secondary" target="_blank" rel="noopener">Follow on Instagram →</a>
+                <p class="btn-note">Not ready to support yet? No worries at all.</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p class="footer-brand">Echoes</p>
+                <div class="footer-links">
+                    <a href="https://www.elvygerez.com/" target="_blank" rel="noopener">Substack</a>
+                    <a href="https://www.instagram.com/elvygerez/" target="_blank" rel="noopener">Instagram</a>
+                </div>
+            </div>
+
         </div>
-
-        <p style="font-size: 0.9rem; margin-bottom: 10px;">
-            Not ready to support yet? No worries at all.
-        </p>
-        
-        <a href="https://instagram.com/SEU_USER" class="btn btn-secondary">Back to Instagram</a>
-    </div>
+    </main>
 
 </body>
 </html>
