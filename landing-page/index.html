@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape the Noise — Echoes by Elvy Gerez</title>
+    <meta name="description" content="Join 1,000+ readers. Get the exclusive Echoes Starter Pack — 7 illustrated flash fiction stories and a curated playlist. Free.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- 
+    =============================================
+    META PIXEL — PASTE YOUR PIXEL CODE BELOW
+    =============================================
+    -->
+    <!-- Meta Pixel Code -->
+    <!-- 
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID_HERE');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+    -->
+    <!-- End Meta Pixel Code -->
+
+    <style>
+        :root {
+            --bg-deep: #0a0908;
+            --bg-warm: #12100e;
+            --bg-card: #1a1714;
+            --bg-card-hover: #221f1a;
+            --gold: #c9a96e;
+            --gold-light: #d4ba85;
+            --gold-dim: #8a7348;
+            --cream: #e8dcc8;
+            --cream-soft: #d4c5ac;
+            --text-primary: #e8dcc8;
+            --text-secondary: #a89a82;
+            --text-dim: #6b6052;
+            --border-subtle: rgba(201, 169, 110, 0.12);
+            --border-hover: rgba(201, 169, 110, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Lora', Georgia, serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        ::selection {
+            background: rgba(201, 169, 110, 0.3);
+            color: var(--cream);
+        }
+
+        /* ===== LAYOUT ===== */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            position: relative;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(201, 169, 110, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(139, 58, 58, 0.02) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HEADER ===== */
+        .brand {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .brand-name {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 1em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        /* ===== HERO CONTENT ===== */
+        .hero-content {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .headline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(2.2rem, 6vw, 3.2rem);
+            color: var(--cream);
+            line-height: 1.15;
+            margin-bottom: 0.4em;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        .headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .subheadline {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 420px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem auto;
+            max-width: 200px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.7s forwards;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+        }
+
+        .divider span {
+            color: var(--gold-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ===== WHAT'S INSIDE ===== */
+        .features {
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.8s forwards;
+        }
+
+        .features-title {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .feature:first-of-type {
+            border-radius: 2px 2px 0 0;
+        }
+
+        .feature:last-of-type {
+            border-radius: 0 0 2px 2px;
+        }
+
+        .feature:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+            opacity: 0.6;
+        }
+
+        .feature-text {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .feature-text strong {
+            color: var(--cream-soft);
+            font-weight: 500;
+        }
+
+        /* ===== SIGNUP FORM ===== */
+        .signup-area {
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
+        }
+
+        .signup-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.6rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .signup-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== BREVO FORM ===== */
+        .brevo-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 3px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .brevo-form:hover,
+        .brevo-form:focus-within {
+            border-color: var(--border-hover);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group:last-of-type {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: var(--bg-deep);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            color: var(--cream);
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-input::placeholder {
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold-dim);
+            box-shadow: 0 0 0 1px rgba(201, 169, 110, 0.1);
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+            border: none;
+            border-radius: 2px;
+            color: var(--bg-deep);
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 500;
+            font-size: 0.78rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; right: 0; bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            transition: left 0.4s ease;
+        }
+
+        .form-btn:hover::before {
+            left: 0;
+        }
+
+        .form-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.25);
+        }
+
+        .form-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-btn:disabled:hover {
+            box-shadow: none;
+        }
+
+        .form-error {
+            display: none;
+            margin-top: 0.8rem;
+            padding: 0.7rem 1rem;
+            background: rgba(180, 60, 60, 0.12);
+            border: 1px solid rgba(180, 60, 60, 0.25);
+            border-radius: 2px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.78rem;
+            color: #d4836a;
+            text-align: center;
+        }
+
+        .form-error.visible {
+            display: block;
+        }
+
+        .trust-line {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== SOCIAL PROOF ===== */
+        .testimonial {
+            text-align: center;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            color: var(--gold-dim);
+            font-size: 1.5rem;
+        }
+
+        .testimonial-quote::after {
+            content: '"';
+            color: var(--gold-dim);
+            font-size: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.3s forwards;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 540px) {
+            .page { padding: 2rem 1.2rem; }
+            .feature { padding: 0.9rem 1rem; gap: 0.8rem; }
+            .substack-embed { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="page">
+        <div class="container">
+
+            <!-- Brand -->
+            <div class="brand">
+                <span class="brand-name">Echoes</span>
+            </div>
+
+            <!-- Headline -->
+            <div class="hero-content">
+                <h1 class="headline">Escape the Noise.<br>Rediscover <em>Deep</em> Storytelling.</h1>
+                <p class="subheadline">The algorithm feeds you distractions. Echoes feeds your soul. Get the exclusive Starter Pack — for free.</p>
+            </div>
+
+            <div class="divider"><span>✦</span></div>
+
+            <!-- What's Inside -->
+            <div class="features">
+                <p class="features-title">What's inside the pack</p>
+
+                <div class="feature">
+                    <span class="feature-icon">✦</span>
+                    <p class="feature-text"><strong>7 Extended Flash Fictions</strong> — The "Director's Cut" versions of the most viral reels. Deeper, rawer, uncut.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">♫</span>
+                    <p class="feature-text"><strong>The 'In Truth' Playlist</strong> — A curated Spotify selection. Listen while you read — experience the atmosphere.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">✉</span>
+                    <p class="feature-text"><strong>A Weekly Shelter</strong> — One new deep story every week in your inbox. A moment of pause in your chaotic week.</p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="signup-area" id="signup">
+                <h2 class="signup-title">Claim Your Starter Pack</h2>
+                <p class="signup-subtitle">Enter your email. The pack arrives instantly.</p>
+
+                <div class="brevo-form" id="brevoForm">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input class="form-input" type="text" id="firstName" placeholder="Your first name" required autocomplete="given-name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-input" type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <button class="form-btn" type="button" id="submitBtn" onclick="submitToBrevo()">
+                        <span>Send Me the Starter Pack</span>
+                    </button>
+                    <div class="form-error" id="formError"></div>
+                </div>
+
+                <p class="trust-line">Free forever. No spam. Unsubscribe anytime.</p>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="testimonial">
+                <p class="testimonial-quote">I stopped scrolling for the first time in months. Finally, something that makes me feel, not just watch.</p>
+                <p class="testimonial-author">— Sarah J., reader since 2024</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p class="footer-brand">Echoes</p>
+                <div class="footer-links">
+                    <a href="https://www.elvygerez.com/" target="_blank" rel="noopener">Substack</a>
+                    <a href="https://www.instagram.com/elvygerez/" target="_blank" rel="noopener">Instagram</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+    /*
+    =============================================
+    BREVO INTEGRATION — CONFIGURE BEFORE DEPLOY
+    =============================================
+    1. Go to Brevo > Settings > API Keys
+       Copy your API key and paste below.
+    
+    2. Go to Brevo > Contacts > Lists
+       Create a list (e.g., "Echoes Starter Pack")
+       Copy the List ID (number) and paste below.
+
+    3. This list must be the ENTRY TRIGGER of your
+       Brevo automation (the 4-email nurture sequence).
+    =============================================
+    */
+    const BREVO_API_KEY = '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';
+    const BREVO_LIST_ID = 5;
+    const THANK_YOU_URL = 'https://landing-pages-echoes.netlify.app/thank-you';
+
+    async function submitToBrevo() {
+        const btn = document.getElementById('submitBtn');
+        const errorEl = document.getElementById('formError');
+        const firstNameInput = document.getElementById('firstName');
+        const emailInput = document.getElementById('email');
+
+        const firstName = firstNameInput.value.trim();
+        const email = emailInput.value.trim();
+
+        // Reset error state
+        errorEl.classList.remove('visible');
+
+        // Validate
+        if (!firstName) {
+            showError('Please enter your first name.');
+            firstNameInput.focus();
+            return;
+        }
+        if (!email || !isValidEmail(email)) {
+            showError('Please enter a valid email address.');
+            emailInput.focus();
+            return;
+        }
+
+        // Disable button
+        btn.disabled = true;
+        btn.querySelector('span').textContent = 'SENDING...';
+
+        try {
+            const response = await fetch('https://api.brevo.com/v3/contacts', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'api-key': BREVO_API_KEY
+                },
+                body: JSON.stringify({
+                    email: email,
+                    attributes: {
+                        FIRSTNAME: firstName
+                    },
+                    listIds: [BREVO_LIST_ID],
+                    updateEnabled: true
+                })
+            });
+
+            if (response.ok || response.status === 201 || response.status === 204) {
+                // Success — redirect to thank-you page
+                window.location.href = THANK_YOU_URL;
+            } else {
+                const data = await response.json().catch(() => null);
+
+                // Contact already exists — still redirect (they get the pack again)
+                if (data && data.code === 'duplicate_parameter') {
+                    window.location.href = THANK_YOU_URL;
+                    return;
+                }
+
+                throw new Error(data?.message || 'Something went wrong. Please try again.');
+            }
+        } catch (err) {
+            btn.disabled = false;
+            btn.querySelector('span').textContent = 'SEND ME THE STARTER PACK';
+
+            if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+                showError('Connection error. Please check your internet and try again.');
+            } else {
+                showError(err.message || 'Something went wrong. Please try again.');
+            }
+        }
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showError(msg) {
+        const errorEl = document.getElementById('formError');
+        errorEl.textContent = msg;
+        errorEl.classList.add('visible');
+    }
+
+    // Allow Enter key to submit
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && (e.target.id === 'firstName' || e.target.id === 'email')) {
+            e.preventDefault();
+            submitToBrevo();
+        }
+    });
+    </script>
+
+</body>
+</html>
