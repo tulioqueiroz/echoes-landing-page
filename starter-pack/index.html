@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3B7SDSHK2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L3B7SDSHK2');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Starter Pack — Echoes by Elvy Gerez</title>
@@ -42,7 +51,6 @@
             overflow-x: hidden;
         }
 
-        /* Noise texture overlay */
         body::after {
             content: '';
             position: fixed;
@@ -57,7 +65,6 @@
             color: var(--cream);
         }
 
-        /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -80,7 +87,6 @@
                 radial-gradient(ellipse at 50% 90%, rgba(201, 169, 110, 0.02) 0%, transparent 40%);
         }
 
-        /* Decorative corner ornaments */
         .hero-corner {
             position: absolute;
             width: 80px;
@@ -179,7 +185,6 @@
             animation: scrollPulse 2.5s ease-in-out infinite;
         }
 
-        /* ===== WELCOME LETTER ===== */
         .welcome {
             max-width: 620px;
             margin: 0 auto;
@@ -278,7 +283,6 @@
             color: var(--gold);
         }
 
-        /* ===== SECTION DIVIDER ===== */
         .divider {
             display: flex;
             align-items: center;
@@ -302,7 +306,6 @@
             font-size: 0.9rem;
         }
 
-        /* ===== STORIES SECTION ===== */
         .stories {
             padding: 4rem 2rem 5rem;
             max-width: 860px;
@@ -450,7 +453,6 @@
             transform: translateX(0);
         }
 
-        /* ===== PLAYLIST SECTION ===== */
         .playlist {
             padding: 4rem 2rem 5rem;
             max-width: 700px;
@@ -483,7 +485,6 @@
             border: none;
         }
 
-        /* ===== WHAT IS ECHOES ===== */
         .about {
             max-width: 620px;
             margin: 0 auto;
@@ -511,7 +512,6 @@
             font-style: italic;
         }
 
-        /* ===== CTA SECTION ===== */
         .cta {
             padding: 5rem 2rem 6rem;
             text-align: center;
@@ -564,7 +564,6 @@
             letter-spacing: 0.35em;
         }
 
-        /* ===== FOOTER ===== */
         footer {
             padding: 3rem 2rem;
             text-align: center;
@@ -610,7 +609,6 @@
             opacity: 0.5;
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
@@ -636,7 +634,6 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 640px) {
             .hero-corner { display: none; }
 
@@ -664,7 +661,6 @@
 </head>
 <body>
 
-    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="hero-corner hero-corner--tl"></div>
         <div class="hero-corner hero-corner--tr"></div>
@@ -683,8 +679,6 @@
         </div>
     </section>
 
-
-    <!-- ===== WELCOME LETTER ===== -->
     <section class="welcome reveal">
         <div class="welcome-header">
             <div class="welcome-icon">✉</div>
@@ -727,17 +721,13 @@
         </div>
     </section>
 
-
     <div class="divider"><span>✦</span></div>
 
-
-    <!-- ===== STORIES ===== -->
     <section class="stories">
         <p class="section-label reveal">Seven Extended Flash Fictions</p>
         <h2 class="section-title reveal">The Stories</h2>
         <p class="section-desc reveal">Read them in sequence. Each one builds on the last — from becoming to arrival.</p>
 
-        <!-- Story I -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=01_enchanted_reverie" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">I</div>
             <div class="story-content">
@@ -752,7 +742,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story II -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=02_high_hopes" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">II</div>
             <div class="story-content">
@@ -767,7 +756,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story III -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=03_whispered_lightning" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">III</div>
             <div class="story-content">
@@ -782,7 +770,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story IV -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=04_the_asking" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">IV</div>
             <div class="story-content">
@@ -797,7 +784,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story V -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=05_infinito_amore" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">V</div>
             <div class="story-content">
@@ -812,7 +798,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story VI -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=06_primal" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">VI</div>
             <div class="story-content">
@@ -827,7 +812,6 @@
             <span class="story-arrow">→</span>
         </a>
 
-        <!-- Story VII -->
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=starter_pack_stories&utm_content=07_in_truth" target="_blank" rel="noopener" class="story-card reveal">
             <div class="story-number">VII</div>
             <div class="story-content">
@@ -843,11 +827,8 @@
         </a>
     </section>
 
-
     <div class="divider"><span>♫</span></div>
 
-
-    <!-- ===== PLAYLIST ===== -->
     <section class="playlist">
         <p class="section-label reveal">The Soundtrack</p>
         <h2 class="section-title reveal">In Truth: Flash Fiction</h2>
@@ -858,11 +839,8 @@
         </div>
     </section>
 
-
     <div class="divider"><span>✦</span></div>
 
-
-    <!-- ===== WHAT IS ECHOES ===== -->
     <section class="about reveal">
         <p class="section-label">About</p>
         <h2>What is Echoes?</h2>
@@ -871,8 +849,6 @@
         <p class="emphasis">For those who feel deeply and aren't afraid of the dark parts.</p>
     </section>
 
-
-    <!-- ===== CTA ===== -->
     <section class="cta">
         <p class="section-label reveal">Stay</p>
         <h2 class="reveal">Want more stories like these?</h2>
@@ -880,8 +856,6 @@
         <a href="https://www.elvygerez.com?utm_source=site&utm_medium=starter_pack_page&utm_campaign=substack_cta" target="_blank" rel="noopener" class="cta-button reveal">Subscribe to Echoes</a>
     </section>
 
-
-    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-brand">Echoes</div>
         <div class="footer-links">
@@ -892,8 +866,6 @@
         <p class="footer-copy">&copy; 2025 Elvy Gerez. All rights reserved.</p>
     </footer>
 
-
-    <!-- ===== SCROLL REVEAL SCRIPT ===== -->
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
