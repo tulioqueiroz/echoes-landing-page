@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3B7SDSHK2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L3B7SDSHK2');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>It's On The Way — Echoes by Elvy Gerez</title>
@@ -77,7 +86,6 @@
             color: var(--cream);
         }
 
-        /* ===== LAYOUT ===== */
         .page {
             min-height: 100vh;
             display: flex;
@@ -105,7 +113,6 @@
             text-align: center;
         }
 
-        /* ===== BRAND ===== */
         .brand {
             margin-bottom: 3rem;
             opacity: 0;
@@ -121,7 +128,6 @@
             color: var(--gold-dim);
         }
 
-        /* ===== CHECK ANIMATION ===== */
         .check-circle {
             width: 80px;
             height: 80px;
@@ -148,7 +154,6 @@
             animation: drawCheck 0.5s ease 0.9s forwards;
         }
 
-        /* ===== CONTENT ===== */
         .title {
             font-family: 'Cormorant Garamond', Georgia, serif;
             font-weight: 300;
@@ -187,7 +192,6 @@
             animation: fadeUp 0.8s ease 1s forwards;
         }
 
-        /* ===== DIVIDER ===== */
         .divider {
             display: flex;
             align-items: center;
@@ -212,7 +216,6 @@
             font-size: 0.85rem;
         }
 
-        /* ===== WHILE YOU WAIT ===== */
         .meanwhile {
             opacity: 0;
             animation: fadeUp 1s ease 1.2s forwards;
@@ -241,7 +244,6 @@
             font-weight: 500;
         }
 
-        /* ===== BUTTONS ===== */
         .buttons {
             display: flex;
             flex-direction: column;
@@ -304,7 +306,6 @@
             margin-top: 0.3rem;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             margin-top: 3rem;
             padding-top: 2rem;
@@ -343,7 +344,6 @@
             color: var(--gold);
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -358,7 +358,6 @@
             to { stroke-dashoffset: 0; }
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 540px) {
             .page { padding: 2rem 1.2rem; }
         }
@@ -369,42 +368,35 @@
     <main class="page">
         <div class="container">
 
-            <!-- Brand -->
             <div class="brand">
                 <span class="brand-name">Echoes</span>
             </div>
 
-            <!-- Check Animation -->
             <div class="check-circle">
                 <svg class="check-icon" viewBox="0 0 24 24">
                     <polyline points="6 12 10 16 18 8"></polyline>
                 </svg>
             </div>
 
-            <!-- Title -->
             <h1 class="title">It's on <em>the way.</em></h1>
 
-            <!-- Message -->
             <p class="message">Your Starter Pack has been sent to your inbox. Seven stories, one playlist, and a letter from Elvy — all waiting for you.</p>
 
             <p class="inbox-note">Check your inbox in the next 2 minutes. If you don't see it, check your spam folder.</p>
 
             <div class="divider"><span>✦</span></div>
 
-            <!-- While You Wait -->
             <div class="meanwhile">
                 <p class="meanwhile-label">While you wait</p>
                 <p class="meanwhile-text">Echoes is an <strong>independent project</strong> — no publishers, no sponsors, no algorithms deciding what gets written. If this kind of work matters to you, there are two ways to help it grow:</p>
             </div>
 
-            <!-- Buttons -->
             <div class="buttons">
                 <a href="https://buymeacoffee.com/elvygerez?utm_source=site&utm_medium=thankyou_page&utm_campaign=bmac_cta" class="btn-primary" target="_blank" rel="noopener">☕ Buy Elvy a Coffee</a>
                 <a href="https://www.instagram.com/elvygerez/?utm_source=site&utm_medium=thankyou_page&utm_campaign=instagram_follow" class="btn-secondary" target="_blank" rel="noopener">Follow on Instagram →</a>
                 <p class="btn-note">Not ready to support yet? No worries at all.</p>
             </div>
 
-            <!-- Footer -->
             <div class="footer">
                 <p class="footer-brand">Echoes</p>
                 <div class="footer-links">
