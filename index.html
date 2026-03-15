@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3B7SDSHK2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L3B7SDSHK2');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape the Noise — Echoes by Elvy Gerez</title>
-    <meta name="description" content="Join 1,000+ readers. Get the exclusive Echoes Starter Pack — 7 illustrated flash fiction stories and a curated playlist. Free.">
+    <meta name="description" content="Get the exclusive Echoes Starter Pack — 7 illustrated flash fiction stories and a curated playlist. Free.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
@@ -78,7 +87,6 @@
             color: var(--cream);
         }
 
-        /* ===== LAYOUT ===== */
         .page {
             min-height: 100vh;
             display: flex;
@@ -105,7 +113,6 @@
             z-index: 1;
         }
 
-        /* ===== HEADER ===== */
         .brand {
             text-align: center;
             margin-bottom: 3rem;
@@ -122,7 +129,6 @@
             color: var(--gold-dim);
         }
 
-        /* ===== HERO CONTENT ===== */
         .hero-content {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -157,7 +163,6 @@
             animation: fadeUp 1s ease 0.6s forwards;
         }
 
-        /* ===== DIVIDER ===== */
         .divider {
             display: flex;
             align-items: center;
@@ -182,7 +187,6 @@
             font-size: 0.85rem;
         }
 
-        /* ===== WHAT'S INSIDE ===== */
         .features {
             margin-bottom: 2.5rem;
             opacity: 0;
@@ -241,7 +245,6 @@
             font-weight: 500;
         }
 
-        /* ===== SIGNUP FORM ===== */
         .signup-area {
             text-align: center;
             margin-bottom: 2rem;
@@ -263,7 +266,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* ===== BREVO FORM ===== */
         .brevo-form {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -401,51 +403,12 @@
             letter-spacing: 0.05em;
         }
 
-        /* ===== SOCIAL PROOF ===== */
-        .testimonial {
-            text-align: center;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 1.2s forwards;
-        }
-
-        .testimonial-quote {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
-        }
-
-        .testimonial-quote::before {
-            content: '"';
-            color: var(--gold-dim);
-            font-size: 1.5rem;
-        }
-
-        .testimonial-quote::after {
-            content: '"';
-            color: var(--gold-dim);
-            font-size: 1.5rem;
-        }
-
-        .testimonial-author {
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 300;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            letter-spacing: 0.1em;
-        }
-
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid var(--border-subtle);
             opacity: 0;
-            animation: fadeUp 0.8s ease 1.3s forwards;
+            animation: fadeUp 0.8s ease 1.2s forwards;
         }
 
         .footer-brand {
@@ -478,17 +441,14 @@
             color: var(--gold);
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 540px) {
             .page { padding: 2rem 1.2rem; }
             .feature { padding: 0.9rem 1rem; gap: 0.8rem; }
-            .substack-embed { padding: 1rem; }
         }
     </style>
 </head>
@@ -551,18 +511,12 @@
                 <p class="trust-line">Free forever. No spam. Unsubscribe anytime.</p>
             </div>
 
-            <!-- Testimonial -->
-            <div class="testimonial">
-                <p class="testimonial-quote">I stopped scrolling for the first time in months. Finally, something that makes me feel, not just watch.</p>
-                <p class="testimonial-author">— Sarah J., reader since 2024</p>
-            </div>
-
             <!-- Footer -->
             <div class="footer">
                 <p class="footer-brand">Echoes</p>
                 <div class="footer-links">
-                    <a href="https://www.elvygerez.com/" target="_blank" rel="noopener">Substack</a>
-                    <a href="https://www.instagram.com/elvygerez/" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://www.elvygerez.com?utm_source=site&utm_medium=landing_page&utm_campaign=footer_substack" target="_blank" rel="noopener">Substack</a>
+                    <a href="https://www.instagram.com/elvygerez/?utm_source=site&utm_medium=landing_page&utm_campaign=footer_instagram" target="_blank" rel="noopener">Instagram</a>
                 </div>
             </div>
 
@@ -570,20 +524,8 @@
     </main>
 
     <script>
-    /*
-    =============================================
-    BREVO INTEGRATION — VIA NETLIFY FUNCTION
-    =============================================
-    A API key do Brevo NÃO fica mais no frontend.
-    Ela está na variável de ambiente BREVO_API_KEY
-    configurada no painel do Netlify.
-
-    O formulário envia para /.netlify/functions/subscribe
-    que é uma função serverless do Netlify.
-    =============================================
-    */
     const SUBSCRIBE_URL = '/.netlify/functions/subscribe';
-    const THANK_YOU_URL = 'https://landing-pages-echoes.netlify.app/thank-you';
+    const THANK_YOU_URL = 'https://get.elvygerez.com/thank-you/';
 
     async function submitToBrevo() {
         const btn = document.getElementById('submitBtn');
@@ -594,10 +536,8 @@
         const firstName = firstNameInput.value.trim();
         const email = emailInput.value.trim();
 
-        // Reset error state
         errorEl.classList.remove('visible');
 
-        // Validate
         if (!firstName) {
             showError('Please enter your first name.');
             firstNameInput.focus();
@@ -609,7 +549,6 @@
             return;
         }
 
-        // Disable button
         btn.disabled = true;
         btn.querySelector('span').textContent = 'SENDING...';
 
@@ -628,7 +567,6 @@
             const data = await response.json().catch(() => null);
 
             if (response.ok && data?.success) {
-                // Success — redirect to thank-you page
                 window.location.href = THANK_YOU_URL;
             } else {
                 throw new Error(data?.error || 'Something went wrong. Please try again.');
@@ -655,7 +593,6 @@
         errorEl.classList.add('visible');
     }
 
-    // Allow Enter key to submit
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && (e.target.id === 'firstName' || e.target.id === 'email')) {
             e.preventDefault();
