@@ -1,9 +1,18 @@
 // netlify/functions/subscribe.js
-// Netlify Function — proxy seguro para a API do Brevo
-// A API key fica na variável de ambiente BREVO_API_KEY (configurada no painel do Netlify)
-
+// Dual subscribe: Substack (primary) + Brevo (backup)
+// Environment variables needed: BREVO_API_KEY, BREVO_LIST_ID
 exports.handler = async (event) => {
-  // Só aceita POST
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      body: "",
+    };
+  }
+
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -12,73 +21,94 @@ exports.handler = async (event) => {
     };
   }
 
-  // CORS headers (permite chamadas da sua landing page)
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json",
   };
 
-  // Handle preflight
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers, body: "" };
-  }
-
   try {
     const { email, firstName } = JSON.parse(event.body);
 
-    // Validação básica
-    if (!email || !firstName) {
+    if (!email) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: "Email and first name are required." }),
+        body: JSON.stringify({ error: "Email is required." }),
       };
     }
 
-    // Chama a API do Brevo com a key segura
-    const response = await fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "api-key": process.env.BREVO_API_KEY,
-      },
-      body: JSON.stringify({
-        email: email,
-        attributes: {
-          FIRSTNAME: firstName,
+    // ── 1. SUBSTACK (primary) ──
+    // Uses the nojs endpoint to subscribe directly as free subscriber
+    let substackOk = false;
+    try {
+      const substackResponse = await fetch(
+        "https://www.elvygerez.com/api/v1/free?nojs=true",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            Origin: "https://www.elvygerez.com",
+            Referer: "https://www.elvygerez.com/",
+          },
+          body: `email=${encodeURIComponent(email)}&first_name=${encodeURIComponent(firstName || "")}&source=subscribe_page`,
+        }
+      );
+      // Substack returns 200 on success, or redirects
+      substackOk = substackResponse.ok || substackResponse.status === 302;
+    } catch (substackErr) {
+      // Substack failed silently — we still have Brevo as backup
+      console.error("Substack subscribe error:", substackErr.message);
+    }
+
+    // ── 2. BREVO (backup list) ──
+    let brevoOk = false;
+    try {
+      const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "api-key": process.env.BREVO_API_KEY,
         },
-        listIds: [parseInt(process.env.BREVO_LIST_ID || "5")],
-        updateEnabled: true,
-      }),
-    });
+        body: JSON.stringify({
+          email: email,
+          attributes: { FIRSTNAME: firstName || "" },
+          listIds: [parseInt(process.env.BREVO_LIST_ID || "5")],
+          updateEnabled: true,
+        }),
+      });
+      const brevoData = await brevoResponse.json().catch(() => null);
+      brevoOk =
+        brevoResponse.ok ||
+        brevoResponse.status === 201 ||
+        brevoResponse.status === 204 ||
+        (brevoData && brevoData.code === "duplicate_parameter");
+    } catch (brevoErr) {
+      console.error("Brevo subscribe error:", brevoErr.message);
+    }
 
-    const data = await response.json().catch(() => null);
-
-    // Sucesso ou contato duplicado (ambos são OK)
-    if (response.ok || response.status === 201 || response.status === 204) {
+    // Success if at least one worked
+    if (substackOk || brevoOk) {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ success: true }),
+        body: JSON.stringify({
+          success: true,
+          substack: substackOk,
+          brevo: brevoOk,
+        }),
       };
     }
 
-    if (data && data.code === "duplicate_parameter") {
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ success: true, duplicate: true }),
-      };
-    }
-
-    // Erro da API do Brevo
+    // Both failed
     return {
-      statusCode: response.status,
+      statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: data?.message || "Something went wrong with the email service.",
+        error: "Something went wrong. Please try again.",
       }),
     };
   } catch (err) {
