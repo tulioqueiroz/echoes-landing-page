@@ -12,7 +12,6 @@ exports.handler = async (event) => {
       body: "",
     };
   }
-
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -20,15 +19,25 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
-
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "application/json",
   };
-
   try {
-    const { email, firstName } = JSON.parse(event.body);
+    const { email, firstName, website } = JSON.parse(event.body);
+
+    // ── HONEYPOT CHECK ──
+    // The "website" field is hidden from humans via CSS. If filled, it's a bot.
+    // Pretend success without subscribing anywhere. The bot thinks it worked
+    // and won't change tactics; we don't pollute Substack or Brevo.
+    if (website && typeof website === "string" && website.trim() !== "") {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true }),
+      };
+    }
 
     if (!email) {
       return {
@@ -37,7 +46,6 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: "Email is required." }),
       };
     }
-
     // ── 1. SUBSTACK (primary) ──
     // Uses the nojs endpoint to subscribe directly as free subscriber
     let substackOk = false;
@@ -62,7 +70,6 @@ exports.handler = async (event) => {
       // Substack failed silently — we still have Brevo as backup
       console.error("Substack subscribe error:", substackErr.message);
     }
-
     // ── 2. BREVO (backup list) ──
     let brevoOk = false;
     try {
@@ -89,7 +96,6 @@ exports.handler = async (event) => {
     } catch (brevoErr) {
       console.error("Brevo subscribe error:", brevoErr.message);
     }
-
     // Success if at least one worked
     if (substackOk || brevoOk) {
       return {
@@ -102,7 +108,6 @@ exports.handler = async (event) => {
         }),
       };
     }
-
     // Both failed
     return {
       statusCode: 500,
