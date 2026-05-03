@@ -51,6 +51,7 @@
         .form-input{width:100%;padding:.75rem 1rem;background:var(--bg-card);border:1px solid var(--border-subtle);color:var(--cream);font-family:'Lora',Georgia,serif;font-size:.9rem;outline:none;border-radius:2px;transition:border-color .3s ease}
         .form-input:focus{border-color:var(--gold-dim)}
         .form-input::placeholder{color:var(--text-dim);font-style:italic}
+        .hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
         .form-btn{width:100%;padding:.9rem;background:var(--gold);border:none;color:var(--bg-deep);font-family:'Source Sans 3',sans-serif;font-weight:400;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all .3s ease;margin-top:.5rem}
         .form-btn:hover{background:var(--gold-light);box-shadow:0 4px 20px rgba(201,169,110,0.3);transform:translateY(-1px)}
         .form-btn:active{transform:translateY(0)}
@@ -146,6 +147,10 @@
                         <label class="form-label" for="firstName">First Name <span class="optional">(optional)</span></label>
                         <input class="form-input" type="text" id="firstName" placeholder="Your first name" autocomplete="given-name">
                     </div>
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
                     <button class="form-btn" type="button" id="submitBtn" onclick="submitForm()">
                         <span>Get Instant Access</span>
                     </button>
@@ -199,7 +204,7 @@
     <script>
     const SUBSCRIBE_URL='/.netlify/functions/subscribe';
     const THANK_YOU_URL='https://get.elvygerez.com/thank-you/';
-    async function submitForm(){const btn=document.getElementById('submitBtn');const errorEl=document.getElementById('formError');const firstNameInput=document.getElementById('firstName');const emailInput=document.getElementById('email');const firstName=firstNameInput.value.trim();const email=emailInput.value.trim();errorEl.classList.remove('visible');if(!email||!isValidEmail(email)){showError('Please enter a valid email address.');emailInput.focus();return}btn.disabled=true;btn.querySelector('span').textContent='SENDING...';try{const response=await fetch(SUBSCRIBE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,firstName:firstName||''})});const data=await response.json().catch(()=>null);if(response.ok&&data?.success){window.location.href=THANK_YOU_URL}else{throw new Error(data?.error||'Something went wrong. Please try again.')}}catch(err){btn.disabled=false;btn.querySelector('span').textContent='GET INSTANT ACCESS';if(err.message.includes('Failed to fetch')||err.message.includes('NetworkError')){showError('Connection error. Please check your internet and try again.')}else{showError(err.message||'Something went wrong. Please try again.')}}}
+    async function submitForm(){const btn=document.getElementById('submitBtn');const errorEl=document.getElementById('formError');const firstNameInput=document.getElementById('firstName');const emailInput=document.getElementById('email');const honeypot=document.getElementById('website');const firstName=firstNameInput.value.trim();const email=emailInput.value.trim();const hpValue=honeypot?honeypot.value.trim():'';if(hpValue!==''){window.location.href=THANK_YOU_URL;return}errorEl.classList.remove('visible');if(!email||!isValidEmail(email)){showError('Please enter a valid email address.');emailInput.focus();return}btn.disabled=true;btn.querySelector('span').textContent='SENDING...';try{const response=await fetch(SUBSCRIBE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,firstName:firstName||'',website:hpValue})});const data=await response.json().catch(()=>null);if(response.ok&&data?.success){window.location.href=THANK_YOU_URL}else{throw new Error(data?.error||'Something went wrong. Please try again.')}}catch(err){btn.disabled=false;btn.querySelector('span').textContent='GET INSTANT ACCESS';if(err.message.includes('Failed to fetch')||err.message.includes('NetworkError')){showError('Connection error. Please check your internet and try again.')}else{showError(err.message||'Something went wrong. Please try again.')}}}
     function isValidEmail(email){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)}
     function showError(msg){const errorEl=document.getElementById('formError');errorEl.textContent=msg;errorEl.classList.add('visible')}
     document.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.target.id==='firstName'||e.target.id==='email')){e.preventDefault();submitForm()}});
